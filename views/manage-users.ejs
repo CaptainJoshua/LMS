@@ -1,50 +1,5 @@
 <%- include ('layouts/header') %>
-    <!-- <h1 class="table">Manage Users</h1> -->
 
-    <!-- <table class="table">
-        <thead>
-            <th>id</th>
-            <th>email</th>
-            <th>username</th>
-            <th>name</th>
-            <th>subjects</th>
-            <th>role</th>
-        </thead>
-        <tbody>
-            <%# users.forEach(user => { %>
-                <tr>
-                    <td>
-                        <%# user.id %>
-                    </td>
-                    <td>
-                        <a href="/admin/user/<%# user.id %>">
-                            <%# user.username %>
-                        </a>
-                    </td>
-                    <td>
-                        <%# user.username %>
-                    </td>
-                    <td>
-                        <%# user.name %>
-                    </td>
-                    <td>
-                        <%# user.subjects %>
-                    </td>
-                    <td>
-                        <form action="/admin/update-role" method="post" class="manage-user-form">
-                            <input type="hidden" name="id" value="<%# user.id %>" />
-                            <select name="role" id="role">
-            <option value="ADMIN" <%# user.role === 'ADMIN' ? 'selected' : '' %> >Admin</option>
-            <option value="ACADEME" <%# user.role === 'ACADEME' ? 'selected' : '' %>>Academe</option>
-            <option value="STUDENT" <%# user.role === 'STUDENT' ? 'selected' : '' %>>Student</option>
-          </select>
-                            <input type="submit" value="update">
-                        </form>
-                    </td>
-                </tr>
-                <%# }) %>
-        </tbody>
-    </table> -->
     <div class="container">
         <div class="row my-4">
             <div class="col-lg-12">
@@ -57,17 +12,14 @@
                     <% if(users != '') { %>
                         <table class="table" id="myTable">
                             <thead>
-                                <tr>
+                                <tr class="table-dark">
                                     <th>id</th>
-                                    <th>Image</th>
                                     <th>Name</th>
+                                    <th>Role</th>
                                     <th>Gender</th>
                                     <th>Age</th>
-                                    <th>Profile</th>
                                     <th>Grade/Level</th>
                                     <th>Section</th>
-                                    <th>Subjects</th>
-                                    <th>Role</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -77,11 +29,14 @@
                                         <td>
                                             <%= index %>
                                         </td>
+
                                         <td>
-                                            <img src="<%= row.image %>" alt="" width="50" height="50" />
+                                            <a href="/admin/user/<%= row._id %> ">
+                                                <%= row.name %>
+                                            </a>
                                         </td>
                                         <td>
-                                            <%= row.name %>
+                                            <%= row.role %>
                                         </td>
                                         <td>
                                             <%= row.gender %>
@@ -89,22 +44,12 @@
                                         <td>
                                             <%= row.age %>
                                         </td>
-                                        <td>
-                                            <a href="/admin/user/<%= row._id %>">
-                                                <%= row.username %>
-                                            </a>
-                                        </td>
+
                                         <td>
                                             <%= row.grlvl %>
                                         </td>
                                         <td>
-                                            <%= row.section %>
-                                        </td>
-                                        <td>
                                             <%= row.subjects %>
-                                        </td>
-                                        <td>
-                                            <%= row.role %>
                                         </td>
                                         <td>
                                             <a href="/admin/user/<%= row._id %>/edit" class="text-success"><i class="fas fa-edit fa-lg mx-1"></i></a>
