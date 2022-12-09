@@ -9,19 +9,11 @@
                 <div class="card mb-3" style="border-radius: 0.5rem">
                     <div class="row g-0">
                         <div class="col-md-4 gradient-custom text-center text-white bg-info bg-gradient">
-                            <!-- The image below is sample only, we will get the save image from database to display on this -->
-                            <img src="<%= person.image? person.image : '' %>" />
-                            <!-- The value of name will come from the database -->
-                            <h5>Name:
-                                <%= person.name %>
-                            </h5>
-                            <!-- The value of role will come from database -->
-                            <p>Role:
-                                <%= person.role %>
+                            <p class="text-center fs-5 mt-5 mb-3 text-dark">
+                                <span><%= person.name %></span>
                             </p>
-                            <!-- The value of student No. will come from database -->
-                            <p>Student No.
-                                <%= person.studnum? person.studnum : 'N/A'%>
+                            <p class="text-center fs-5 mt-5 mb-3 text-dark">Role:
+                                <%= person.role? person.role : 'N/A' %>
                             </p>
 
                             <!-- Need to fix the modal, it is not currently working right now -->
@@ -46,7 +38,7 @@
                         </div>
                         <div class="col-md-8">
                             <div class="card-body p-4">
-                                <h6><mark>Information</mark></h6>
+                                <h6 class="fs-5">Information</h6>
                                 <hr class="mt-0 mb-4" />
                                 <div class="row pt-4">
                                     <div class="col-6 mb-4">
@@ -67,12 +59,14 @@
                                             <%= person.mobile? person.mobile: 'N/A' %>
                                         </p>
                                     </div>
-                                    <div class="col-6 mb-3">
-                                        <a href="#">
-                                            <h6>Password</h6>
-                                        </a>
-                                        <p class="text-muted"></p>
-                                    </div>
+                                    <% if (user.role === 'STUDENT' || user.role === 'ACADEME') {%>
+                                        <div class="col-6 mb-3">
+                                            <a href="#">
+                                                <h6>Password</h6>
+                                            </a>
+                                            <p class="text-muted"></p>
+                                        </div>
+                                        <% } %>
                                 </div>
                             </div>
                         </div>
