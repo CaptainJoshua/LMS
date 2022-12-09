@@ -9,7 +9,10 @@
                     <h5 class="card-header text-success fw-bold">Filipino</h5>
                     <div class="card-body">
                         <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil, eveniet.</p>
-                        <a href="#" class="btn btn-primary">Lessons</a>
+                        <a href="/user/dashboard/filipino" class="btn btn-primary">Lessons</a>
+                        <% if (user.role === 'ACADEME') { %>
+                            <a href="#" class="btn btn-primary">Give lesson</a>
+                            <% } %>
                     </div>
                 </div>
             </div>
@@ -19,7 +22,10 @@
                     <h5 class="card-header text-success fw-bold">English</h5>
                     <div class="card-body">
                         <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil, eveniet.</p>
-                        <a href="#" class="btn btn-primary">Lessons</a>
+                        <a href="/user/dashboard/english" class="btn btn-primary">Lessons</a>
+                        <% if (user.role === 'ACADEME') { %>
+                            <a href="#" class="btn btn-primary">Give lesson</a>
+                            <% } %>
                     </div>
                 </div>
             </div>
@@ -29,7 +35,10 @@
                     <h5 class="card-header text-success fw-bold">Math</h5>
                     <div class="card-body">
                         <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil, eveniet.</p>
-                        <a href="#" class="btn btn-primary">Lessons</a>
+                        <a href="/user/dashboard/math" class="btn btn-primary">Lessons</a>
+                        <% if (user.role === 'ACADEME') { %>
+                            <a href="#" class="btn btn-primary">Give lesson</a>
+                            <% } %>
                     </div>
                 </div>
             </div>
@@ -39,7 +48,10 @@
                     <h5 class="card-header text-success fw-bold">Reading and Phonics</h5>
                     <div class="card-body">
                         <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil, eveniet.</p>
-                        <a href="#" class="btn btn-primary">Lessons</a>
+                        <a href="/user/dashboard/readPhonics" class="btn btn-primary">Lessons</a>
+                        <% if (user.role === 'ACADEME') { %>
+                            <a href="#" class="btn btn-primary">Give lesson</a>
+                            <% } %>
                     </div>
                 </div>
             </div>
