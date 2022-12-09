@@ -122,4 +122,10 @@ router.post(
     }
 );
 
+// Gonna do later the following: 
+// 1. Delete user
+// 2. Update user
+// 3. Upload image
+// 4. Delete image
+
 module.exports = router;
