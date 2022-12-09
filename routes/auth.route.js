@@ -6,18 +6,20 @@ const { ensureLoggedOut, ensureLoggedIn } = require('connect-ensure-login');
 const { registerValidator } = require('../utils/validators');
 const multer = require('multer');
 const fs = require('fs');
+const path = require('path');
 
 // image upload
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null, './uploads/');
+        cb(null, 'images');
     },
     filename: function(req, file, cb) {
-        cb(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
+        console.log(file)
+        cb(null, Date.now() + path.extname(file.originalname));
     }
 });
 
-const upload = multer({ storage: storage }).single('image');
+const upload = multer({ storage: storage });
 // 
 // const fileFilter = (req, file, cb) => {
 //      reject a file
@@ -27,7 +29,6 @@ const upload = multer({ storage: storage }).single('image');
 //         cb(null, false);
 //     }
 // };
-
 
 router.get('/login', ensureLoggedOut({ redirectTo: '/' }), async(req, res, next) => {
     res.render('login');
@@ -41,45 +42,45 @@ router.post('/login', ensureLoggedOut({ redirectTo: '/' }),
         failureFlash: true,
     }));
 
-router.get('/register', ensureLoggedOut({ redirectTo: '/' }), async(req, res, next) => {
-    res.render('register');
-});
+// router.get('/register', ensureLoggedOut({ redirectTo: '/' }), async(req, res, next) => {
+//     res.render('register');
+// });
 
-router.post('/register', upload, //registerValidator,
-    ensureLoggedOut({ redirectTo: '/' }),
-    async(req, res, next) => {
-        try {
-            const errors = validationResult(req);
-            if (!errors.isEmpty()) {
-                errors.array().forEach((error) => {
-                    req.flash('error', error.msg);
-                });
-                res.render('register', {
-                    username: req.body.username,
-                    messages: req.flash(),
-                });
-                return;
-            }
+// router.post('/register', upload.single("image"), //registerValidator,
+//     ensureLoggedOut({ redirectTo: '/' }),
+//     async(req, res, next) => {
+//         try {
+//             const errors = validationResult(req);
+//             if (!errors.isEmpty()) {
+//                 errors.array().forEach((error) => {
+//                     req.flash('error', error.msg);
+//                 });
+//                 res.render('register', {
+//                     username: req.body.username,
+//                     messages: req.flash(),
+//                 });
+//                 return;
+//             }
 
-            const { username } = req.body;
-            const doesExist = await User.findOne({ username });
-            if (doesExist) {
-                req.flash('warning', 'Username/email already exists');
-                res.redirect('/auth/register');
-                return;
-            }
-            const user = new User(req.body, req.file ? req.file.filename : null);
-            await user.save();
-            req.flash(
-                'success',
-                `${user.username} registered successfully, you can now login`
-            );
-            res.redirect('/auth/login');
-        } catch (error) {
-            next(error);
-        }
-    }
-);
+//             const { username } = req.body;
+//             const doesExist = await User.findOne({ username });
+//             if (doesExist) {
+//                 req.flash('warning', 'Username/email already exists');
+//                 res.redirect('/auth/register');
+//                 return;
+//             }
+//             const user = new User(req.body, req.file);
+//             await user.save();
+//             req.flash(
+//                 'success',
+//                 `${user.username} registered successfully, you can now login`
+//             );
+//             res.redirect('/auth/login');
+//         } catch (error) {
+//             next(error);
+//         }
+//     }
+// );
 
 router.get('/logout', ensureLoggedIn({ redirectTo: '/' }), async(req, res, next) => {
     req.logout(function(err) {
