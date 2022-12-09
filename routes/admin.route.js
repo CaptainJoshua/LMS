@@ -76,51 +76,50 @@ router.post('/update-role', async(req, res, next) => {
     }
 });
 
-// router.get(
-//     '/register',
-//     // ensureLoggedOut({ redirectTo: '/' }),
-//     async(req, res, next) => {
-//         res.render('register');
-//     }
-// );
+router.get(
+    '/register',
+    // ensureLoggedOut({ redirectTo: '/' }),
+    async(req, res, next) => {
+        res.render('register');
+    }
+);
 
-// router.post(
-//     '/register',
-//     // ensureLoggedOut({ redirectTo: '/' }),
-//     // registerValidator,
-//     async(req, res, next) => {
-//         try {
-//             const errors = validationResult(req);
-//             if (!errors.isEmpty()) {
-//                 errors.array().forEach((error) => {
-//                     req.flash('error', error.msg);
-//                 });
-//                 res.render('register', {
-//                     username: req.body.username,
-//                     messages: req.flash(),
-//                 });
-//                 return;
-//             }
+router.post(
+    '/register',
+    // ensureLoggedOut({ redirectTo: '/' }),
+    // registerValidator,
+    async(req, res, next) => {
+        try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                errors.array().forEach((error) => {
+                    req.flash('error', error.msg);
+                });
+                res.render('register', {
+                    username: req.body.username,
+                    messages: req.flash(),
+                });
+                return;
+            }
 
-//             const { username } = req.body;
-//             const doesExist = await User.findOne({ username });
-//             if (doesExist) {
-//                 req.flash('warning', 'Username/email already exists');
-//                 res.redirect('/');
-//                 return;
-//             }
-//             const user = new User(req.body);
-//             await user.save();
-//             req.flash(
-//                 'success',
-//                 `${user.username} registered successfully, you can now login`
-//             );
-//             res.redirect('/');
-//         } catch (error) {
-//             next(error);
-//         }
-//     }
-// );
-
+            const { username } = req.body;
+            const doesExist = await User.findOne({ username });
+            if (doesExist) {
+                req.flash('warning', 'Username/email already exists');
+                res.redirect('/');
+                return;
+            }
+            const user = new User(req.body);
+            await user.save();
+            req.flash(
+                'success',
+                `${user.name} registered successfully, they can now login`
+            );
+            res.redirect('/');
+        } catch (error) {
+            next(error);
+        }
+    }
+);
 
 module.exports = router;
