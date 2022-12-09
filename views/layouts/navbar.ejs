@@ -1,0 +1,62 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-success">
+    <div class="container">
+        <a href="/" class="navbar-brand fw-bold"><img src="/img/logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top me-1" />Mary JV's School</a>
+        <button class="navbar-toggler" data-bs-target="#my-nav" data-bs-toggle="collapse" aria-controls="my-nav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+        <div id="my-nav" class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto">
+                <!-- accessible by all users, serve as landing page -->
+                <li class="nav-item">
+                    <a href="/" class="nav-link text-light">Home</a>
+                    <!-- * Dynamic route, can be accessed either logged in or not -->
+                </li>
+                <!-- accessible only by user logged in -->
+                <% if (user) { %>
+                    <li class="nav-item">
+                        <a href="/user/profile" class="nav-link text-light">Profile</a>
+                        <!-- ! The route for this is existing in user.route.js -->
+                    </li>
+                    <li class="nav-item">
+                        <a href="/user/announcements" class="nav-link text-light">Announcements</a>
+                        <!-- ToDo: add a route for this, inside (temporary: /user/announcements) -->
+                    </li>
+                    <!-- accessible only by student or academe -->
+                    <% if (user.role === 'STUDENT' || user.role === 'ACADEME') { %>
+                        <li class="nav-item">
+                            <a href="/user/dashboard " class="nav-link text-light">Dashboard</a>
+                            <!-- ToDo: add a route for this, inside (temporary: /user/dashboard) -->
+                        </li>
+                        <li class="nav-item">
+                            <a href="/user/notification " class="nav-link text-light">Notifications</a>
+                            <!-- ToDo: add a route for this, inside (temporary: /user/notification) -->
+                        </li>
+                        <% } %>
+                            <!-- accessible only by admin -->
+                            <% if (user.role === 'ADMIN') { %>
+                                <li class="nav-item">
+                                    <a href="/admin/users " class="nav-link text-light">Manage Users</a>
+                                    <!-- ! The route for this is existing in admin.route.js -->
+                                </li>
+                                <% } %>
+                                    <!-- accessible by all users logged in -->
+                                    <li class="nav-item">
+                                        <a href="/auth/logout " class="nav-link text-light">Logout</a>
+                                        <!-- ! The route for this is existing in auth.route.js  -->
+                                    </li>
+                                    <% } else { %>
+                                        <li class="nav-item">
+                                            <a href="/auth/register " class="nav-link text-light">Register</a>
+                                            <!-- ToDo: add a route for this, inside admin.route.js -->
+                                            <!-- * The /auth/register will be moved inside the admin  -->
+                                        </li>
+                                        <!-- accessible only by users not logged in -->
+                                        <li class="nav-item">
+                                            <a href="/auth/login " class="nav-link text-light">Login</a>
+                                            <!-- ! The route for this is existing in auth.route.js  -->
+                                        </li>
+                                        <% } %>
+            </ul>
+        </div>
+    </div>
+</nav>
