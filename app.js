@@ -23,13 +23,14 @@ app.use(express.static('public'));
 // folder for uploaded files/images
 app.use(express.static('uploads'));
 
+
 // Init session 
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: { httpOnly: true, }, // secure: true, will be added later once we have https enabled on or deployed app 
-    store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI, dbName: process.env.DB_NAME, }),
+    store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI, }),
 }));
 // For Passport JS Authentication, need to be after session initialization 
 app.use(passport.initialize());
@@ -71,7 +72,6 @@ const PORT = process.env.PORT || 4000;
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI, {
-    dbName: process.env.DB_NAME,
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => {
