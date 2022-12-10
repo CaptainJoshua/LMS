@@ -16,8 +16,7 @@ const UserSchema = new mongoose.Schema({
     section: { type: String, required: false },
     studnum: { type: String, required: false },
     mobile: { type: String, required: false },
-    subjects: { type: Array, required: false },
-    image: { type: String, required: false },
+    subjects: [{ type: String, required: false }],
     created: { type: Date, default: Date.now, required: true },
 });
 
