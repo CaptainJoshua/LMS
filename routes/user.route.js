@@ -66,9 +66,7 @@ router.get('/dashboard/filipino/Unit1/quiz', async(req, res, next) => {
 
 // Start for Unit 3 Filipino
 router.get('/dashboard/filipino/Unit3/lesson', async(req, res, next) => {
-    // create a file path to the file in the filipino folder
     const filePath = 'filipino/unit3/LESSON1.pdf';
-    // send the file to the browser
     res.sendFile(filePath, { root: './public' });
 });
 
@@ -84,9 +82,7 @@ router.get('/dashboard/filipino/Unit3/quiz', async(req, res, next) => {
 
 // Start for Unit 4 Filipino
 router.get('/dashboard/filipino/Unit4/lesson', async(req, res, next) => {
-    // create a file path to the file in the filipino folder
     const filePath = 'filipino/unit4/LESSON1.pdf';
-    // send the file to the browser
     res.sendFile(filePath, { root: './public' });
 });
 
@@ -102,9 +98,7 @@ router.get('/dashboard/filipino/Unit4/quiz', async(req, res, next) => {
 
 // Start for Unit 5 Filipino
 router.get('/dashboard/filipino/Unit5/lesson', async(req, res, next) => {
-    // create a file path to the file in the filipino folder
     const filePath = 'filipino/unit5/LESSON1.pdf';
-    // send the file to the browser
     res.sendFile(filePath, { root: './public' });
 });
 
