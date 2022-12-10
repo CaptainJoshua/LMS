@@ -54,11 +54,11 @@ router.get('/dashboard/filipino/Unit2/lesson', async(req, res, next) => {
     res.sendFile(filePath, { root: './public' });
 });
 
-router.get('/dashboard/filipino/Unit1/activity', async(req, res, next) => {
+router.get('/dashboard/filipino/Unit2/activity', async(req, res, next) => {
     const filePath = 'filipino/unit2/ACTIVITY1.pdf';
     res.sendFile(filePath, { root: './public' });
 });
-router.get('/dashboard/filipino/Unit1/quiz', async(req, res, next) => {
+router.get('/dashboard/filipino/Unit2/quiz', async(req, res, next) => {
     const filePath = 'filipino/unit2/QUIZ.pdf';
     res.sendFile(filePath, { root: './public' });
 });
