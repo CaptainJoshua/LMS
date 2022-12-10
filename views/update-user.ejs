@@ -1,0 +1,112 @@
+<%- include('./layouts/header') %>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mx-auto mt-4">
+                <div class="card shadow">
+                    <div class="card-header bg-info">
+                        <h5><span class="goback text-danger" onclick="window.history.back()">← Go back</span></h5>
+                        <h3 class="text-light text-center">Update user (
+                            <%= person.name %> )</h3>
+                    </div>
+                    <div class="card-body p-4">
+                        <form action="/admin/user/update/<%= person._id %>/" method="POST" id="update-form">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="name" name="name" value="<%= person.name %>">
+                            </div>
+                            <div class="mb-3">
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="age" class="form-label">Age</label>
+                                        <input type="text" class="form-control" id="age" name="age" value="<%= person.age %>">
+                                    </div>
+                                    <div class="col">
+                                        <label for="dob" class="form-label">Birthday</label>
+                                        <input type="date" name="dob" class="form-control" id="dob" value="<%= person.dob %>">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="role" class="form-label">Role</label>
+                                        <select class="form-select" id="role" name="role">
+                                            <option value="STUDENT" <%= person.role === 'STUDENT'? 'selected' : '' %>>Student</option>
+                                            <option value="ACADEME" <%= person.role === 'ACADEME'? 'selected' : '' %>>Academe</option>
+                                            <option value="ADMIN" <%= person.role === 'ADMIN'? 'selected' : '' %>>Admin</option>
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <label for="gender" class="form-label">Gender</label>
+                                        <select name="gender" id="gender" class="form-select">
+                                            <option value="Male" <%= person.gender === 'Male'? 'selected' : '' %>>Male</option>
+                                            <option value="Female" <%= person.gender === 'Female'? 'selected' : '' %>>Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="username" class="form-label">User ID</label>
+                                        <input type="text" name="username" id="username" class="form-control" value="<%= person.username %>">
+                                    </div>
+                                    <div class="col">
+                                        <label for="password" class="form-label">Password</label>
+                                        <input type="text" name="password" id="password" class="form-control" value="<%= person.password %>">
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="hr text-danger">
+                            <p class="h4 text-danger">For Student and Academe</p>
+                            <div class="mb-3">
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="grlvl" class="form-label">Grade / Level</label>
+                                        <select name="grlvl" id="grlvl" class="form-select">
+                                            <option value="Prep" <%= person.grlvl === 'Prep'? 'selected': '' %>>Prep</option>
+                                            <option value="Kinder" <%= person.grlvl === 'Kinder'? 'selected': '' %>>Kinder</option>
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <label for="section" class="form-label">Section</label>
+                                        <select name="section" id="section" class="form-select">
+                                            <option value="Joyful" <%= person.section === 'Joyful'? 'selected' : '' %>>Joyful (Prep)</option>
+                                            <option value="Cheerful" <%= person.section === 'Cheerful'? 'selected' : '' %>>Cheerful (Kinder)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="studnum" class="form-label">Student No.</label>
+                                        <input type="text" name="studnum" id="studnum" class="form-control" value="<%= person.studnum %>">
+                                    </div>
+                                    <div class="col">
+                                        <label for="mobile" class="form-label">Mobile</label>
+                                        <input type="text" name="mobile" id="mobile" class="form-control" value="<%= person.mobile %>">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-0 d-block">
+                                <div class="row-cols-5">
+                                    <label for="subjects" class="form-label">Subjects</label>
+                                    <select name="subjects" id="subjects" class="mb-3 form-control selectpicker w-75" multiple>
+                                       <% person.subjects.forEach(element => { %>
+                                            <option value="<%= element %>" selected><%= element %></option>
+                                        <% }) %>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-1 d-grid">
+                                <input type="submit" value="Update" class="btn btn-primary btn-lg">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include('./layouts/footer') %>
